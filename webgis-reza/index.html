@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Demak_1.js"></script>
+        <script src="data/AGRISAWAH_AR_25K_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-7.169241775867913,110.20697832247762],[-6.767022637085653,111.0329241422103]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_Demak_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">KECAMATAN</th>\
+                        <td>' + (feature.properties['KECAMATAN'] !== null ? autolinker.link(feature.properties['KECAMATAN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Januari</th>\
+                        <td>' + (feature.properties['Januari'] !== null ? autolinker.link(feature.properties['Januari'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Februari</th>\
+                        <td>' + (feature.properties['Februari'] !== null ? autolinker.link(feature.properties['Februari'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maret</th>\
+                        <td>' + (feature.properties['Maret'] !== null ? autolinker.link(feature.properties['Maret'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">April</th>\
+                        <td>' + (feature.properties['April'] !== null ? autolinker.link(feature.properties['April'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Mei</th>\
+                        <td>' + (feature.properties['Mei'] !== null ? autolinker.link(feature.properties['Mei'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Juni</th>\
+                        <td>' + (feature.properties['Juni'] !== null ? autolinker.link(feature.properties['Juni'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Juli</th>\
+                        <td>' + (feature.properties['Juli'] !== null ? autolinker.link(feature.properties['Juli'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Agustus</th>\
+                        <td>' + (feature.properties['Agustus'] !== null ? autolinker.link(feature.properties['Agustus'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">September</th>\
+                        <td>' + (feature.properties['September'] !== null ? autolinker.link(feature.properties['September'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Oktober</th>\
+                        <td>' + (feature.properties['Oktober'] !== null ? autolinker.link(feature.properties['Oktober'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">November</th>\
+                        <td>' + (feature.properties['November'] !== null ? autolinker.link(feature.properties['November'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Desember</th>\
+                        <td>' + (feature.properties['Desember'] !== null ? autolinker.link(feature.properties['Desember'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jumlah</th>\
+                        <td>' + (feature.properties['Jumlah'] !== null ? autolinker.link(feature.properties['Jumlah'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Demak_1_0(feature) {
+            if (feature.properties['Jumlah'] >= 0.000000 && feature.properties['Jumlah'] <= 4733.750000 ) {
+                return {
+                pane: 'pane_Demak_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,250,250,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Jumlah'] >= 4733.750000 && feature.properties['Jumlah'] <= 6466.500000 ) {
+                return {
+                pane: 'pane_Demak_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(168,168,168,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Jumlah'] >= 6466.500000 && feature.properties['Jumlah'] <= 8199.250000 ) {
+                return {
+                pane: 'pane_Demak_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,87,87,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Jumlah'] >= 8199.250000 && feature.properties['Jumlah'] <= 9932.000000 ) {
+                return {
+                pane: 'pane_Demak_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(5,5,5,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Demak_1');
+        map.getPane('pane_Demak_1').style.zIndex = 401;
+        map.getPane('pane_Demak_1').style['mix-blend-mode'] = 'normal';
+        var layer_Demak_1 = new L.geoJson(json_Demak_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Demak_1',
+            layerName: 'layer_Demak_1',
+            pane: 'pane_Demak_1',
+            onEachFeature: pop_Demak_1,
+            style: style_Demak_1_0,
+        });
+        bounds_group.addLayer(layer_Demak_1);
+        map.addLayer(layer_Demak_1);
+        function pop_AGRISAWAH_AR_25K_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(feature.properties['NAMOBJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['JNSSWH'] !== null ? autolinker.link(feature.properties['JNSSWH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FCODE'] !== null ? autolinker.link(feature.properties['FCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AQDATE'] !== null ? autolinker.link(feature.properties['AQDATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PUDATE'] !== null ? autolinker.link(feature.properties['PUDATE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REMARK'] !== null ? autolinker.link(feature.properties['REMARK'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KODLCO'] !== null ? autolinker.link(feature.properties['KODLCO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SRS_ID'] !== null ? autolinker.link(feature.properties['SRS_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LCODE'] !== null ? autolinker.link(feature.properties['LCODE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['METADATA'] !== null ? autolinker.link(feature.properties['METADATA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TNMSWH'] !== null ? autolinker.link(feature.properties['TNMSWH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? autolinker.link(feature.properties['SHAPE_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AGRISAWAH_AR_25K_2_0() {
+            return {
+                pane: 'pane_AGRISAWAH_AR_25K_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,125,183,0.3686274509803922)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AGRISAWAH_AR_25K_2');
+        map.getPane('pane_AGRISAWAH_AR_25K_2').style.zIndex = 402;
+        map.getPane('pane_AGRISAWAH_AR_25K_2').style['mix-blend-mode'] = 'normal';
+        var layer_AGRISAWAH_AR_25K_2 = new L.geoJson(json_AGRISAWAH_AR_25K_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AGRISAWAH_AR_25K_2',
+            layerName: 'layer_AGRISAWAH_AR_25K_2',
+            pane: 'pane_AGRISAWAH_AR_25K_2',
+            onEachFeature: pop_AGRISAWAH_AR_25K_2,
+            style: style_AGRISAWAH_AR_25K_2_0,
+        });
+        bounds_group.addLayer(layer_AGRISAWAH_AR_25K_2);
+        map.addLayer(layer_AGRISAWAH_AR_25K_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/AGRISAWAH_AR_25K_2.png" /> AGRISAWAH_AR_25K': layer_AGRISAWAH_AR_25K_2,'Demak<br /><table><tr><td style="text-align: center;"><img src="legend/Demak_1_Kecil0.png" /></td><td>Kecil</td></tr><tr><td style="text-align: center;"><img src="legend/Demak_1_LumayanLuas1.png" /></td><td>Lumayan Luas</td></tr><tr><td style="text-align: center;"><img src="legend/Demak_1_Luas2.png" /></td><td>Luas</td></tr><tr><td style="text-align: center;"><img src="legend/Demak_1_LuasSekali3.png" /></td><td>Luas Sekali</td></tr></table>': layer_Demak_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Demak_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['KECAMATAN'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'.SF NS Text\', sans-serif;">' + layer.feature.properties['KECAMATAN']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Demak_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Demak_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Demak_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Demak_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Demak_1]);
+        });
+        </script>
+    </body>
+</html>
